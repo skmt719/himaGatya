@@ -1,150 +1,187 @@
 <!DOCTYPE html>
-<html lang="ja"　 xmlns:th="http://www.thymeleaf.org"
-　xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>イベント編集</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <style>
-    body {
-      padding-top: 50px;
-    }
-  </style>
-  <style>
-    .imagePreview {
-      width: 50%;
-      height: 90px;
-      background-position: center center;
-      background-size: cover;
-      -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
-      display: inline-block;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>イベント編集</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+<style>
+body {
+	padding-top: 50px;
+}
+</style>
+<style>
+.imagePreview {
+	width: 50%;
+	height: 90px;
+	background-position: center center;
+	background-size: cover;
+	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+	display: inline-block;
+}
+</style>
 </head>
 
 <body>
-  <div class="container-fluid">
-    <div class="col-xs-12 col-lg-12 col-xs-6">
-      <div class="row justify-content-center">
-        <h3>イベント登録/編集</h3>
-      </div>
-      <div class="row justify-content-start">
-        <div class="col-sm-2">イメージ</div>
-        <div class="col-sm-3">
-          <form action="" method="post" enctype="multipart/form-data">
-            <div class="imagePreview"></div>
-            <div class="input-group">
-              <label class="input-group-btn">
-                            <span class="btn btn-primary"> 画像を選択
-                                <input type="file" style="display:none" class="uploadFile">
-                            </span>
-                        </label>
-              <input type="text" class="form-control" readonly="">
-            </div>
-          </form>
-        </div>
-      </div>
+	<div class="container-fluid">
+		<div class="col-xs-12 col-lg-12 col-xs-6">
+			<div class="row justify-content-center">
+				<h3>イベント登録/編集</h3>
+			</div>
+			<div class="row justify-content-start">
+				<div class="col-sm-2">イメージ</div>
+				<div class="col-sm-3">
+					<form action="" method="post" enctype="multipart/form-data">
+						<div class="imagePreview"></div>
+						<div class="input-group">
+							<label class="input-group-btn"> <span class="btn btn-primary"> 画像を選択 <input type="file"
+									style="display: none" class="uploadFile">
+							</span>
+							</label> <input type="text" class="form-control" readonly="">
+						</div>
+					</form>
+				</div>
+			</div>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script>
-        $(document).on('change', ':file', function() {
-          var input = $(this),
-            numFiles = input.get(0).files ? input.get(0).files.length : 1,
-            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-          input.parent().parent().next(':text').val(label);
 
-          var files = !!this.files ? this.files : [];
-          if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-          if (/^image/.test(files[0].type)) { // only image file
-            var reader = new FileReader(); // instance of the FileReader
-            reader.readAsDataURL(files[0]); // read the local file
-            reader.onloadend = function() { // set image data as background of div
-              input.parent().parent().parent().prev('.imagePreview').css("background-image", "url(" + this.result + ")");
-            }
-          }
-        });
-      </script>
 
-      <div class="row justify-content-center">
-        <div class="col-sm-2">タイトル</div>
-        <div class="col-sm-10 form-inline" style="padding: 3px;">
-          <input type="text" class="form-control input-sm" id="name" placeholder="タイトル" size="20">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">概要</div>
-        <div class="col-sm-10" style="padding: 3px;">
-          <textarea class="form-control  input-sm" rows="3" id="comment" placeholder="概要"></textarea>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">住所</div>
-        <div class="col-sm-10" style="padding: 3px;">
-          <form>
-            <div class="form-row">
-              <div class="col">
-                <input type="text" name="zip01" size="10" maxlength="8" placeholder="郵便番号" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');">
-              </div>
-              <div class="col">
-                <input type="text" name="pref01" size="20" placeholder="都道府県">
-              </div>
-              <div class="col-7">
-                <input type="text" name="addr01" size="60" placeholder="市区町村">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">場所</div>
-        <div class="col-sm-10 form-inline" style="padding: 3px;">
-          <input type="text" class="form-control input-sm" id="name" placeholder="〇〇公園など" size="20">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">開始日</div>
-        <div class="col-sm-10 form-inline" style="padding: 3px;">
-          <input type="date" class="form-control input-sm" id="name" placeholder="yyyy/MM/dd" size="20">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">終了日</div>
-        <div class="col-sm-10 form-inline" style="padding: 3px;">
-          <input type="date" class="form-control input-sm" id="name" placeholder="yyyy/MM/dd" size="20">
-        </div>
-      </div>
-      <div class="row justify-content-center">
-        <div class="col-sm-2">参考URL</div>
-        <div class="col-sm-10 form-inline" style="padding: 3px;">
-          <input type="text" class="form-control input-sm" id="name" placeholder="sample.com" size="20">
-        </div>
-      </div>
+			<form action="#" th:action="@{/admin/edit}" th:object="${eventsForm}" method="post">
+				<div class="row justify-content-center">
+					<div class="col-sm-2">タイトル*</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input type="text" th:field="*{name}"
+							class="form-control input-sm" id="name" placeholder="タイトル"
+							size="20" />
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">概要*</div>
+					<div class="col-sm-10" style="padding: 3px;">
+						<textarea th:field="*{summary}" class="form-control  input-sm"
+							rows="3" id="comment" placeholder="概要"></textarea>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">住所</div>
+					<div class="col-sm-10" style="padding: 3px;">
+						<div class="form-row">
+							<div class="col">
+								<input type="text" size="10" maxlength="8" placeholder="郵便番号"
+									onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');">
+							</div>
 
-      <div class="text justify-content-center">
-        <p>登録者ID:</p>
-      </div>
+							<div class="col-7">
+								<input type="text" th:field="*{address}" size="60"
+									placeholder="都道府県市区町村">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">場所</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input th:field="*{place}" type="text"
+							class="form-control input-sm" id="name" placeholder="〇〇公園など"
+							size="20">
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">費用</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input th:field="*{cost}" type="text"
+							class="form-control input-sm" id="name" placeholder="○○円"
+							size="20">
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">開始日</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input th:field="*{start_on}" type="date"
+							class="form-control input-sm" id="name" placeholder="yyyy/MM/dd"
+							size="20">
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">終了日</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input th:field="*{end_on}" type="date"
+							class="form-control input-sm" id="name" placeholder="yyyy/MM/dd"
+							size="20">
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="col-sm-2">参考URL</div>
+					<div class="col-sm-10 form-inline" style="padding: 3px;">
+						<input th:field="*{event_url}" type="text"
+							class="form-control input-sm" id="name" placeholder="sample.com"
+							size="20">
+					</div>
+				</div>
 
-      <div class="text justify-content-center">
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <div class="text-center" style="padding: 30px;">
-              <button type="button" class="btn btn-default btn-lg">back <span class="glyphicon glyphicon-chevron-right"></span></button>
-            </div>
-            <div class="text-center" style="padding: 30px;">
-              <button type="button" class="btn btn-default btn-lg">save <span class="glyphicon glyphicon-chevron-right"></span></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+				<div class="text justify-content-center">
+					<p>登録者ID:</p>
+				</div>
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-  <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+				<div class="text justify-content-center">
+					<div class="btn-toolbar">
+						<div class="btn-group">
+							<div class="text-center" style="padding: 30px;">
+								<button type="submit" name="back" class="btn btn-default btn-lg">back <span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+							</div>
+							<div class="text-center" style="padding: 30px;">
+								<button type="submit" name="save" class="btn btn-default btn-lg">save <span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script>
+				$(document)
+						.on(
+								'change',
+								':file',
+								function() {
+									var input = $(this), numFiles = input
+											.get(0).files ? input.get(0).files.length
+											: 1, label = input.val().replace(
+											/\\/g, '/').replace(/.*\//, '');
+									input.parent().parent().next(':text').val(
+											label);
+
+									var files = !!this.files ? this.files : [];
+									if (!files.length || !window.FileReader)
+										return; // no file selected, or no FileReader support
+									if (/^image/.test(files[0].type)) { // only image file
+										var reader = new FileReader(); // instance of the FileReader
+										reader.readAsDataURL(files[0]); // read the local file
+										reader.onloadend = function() { // set image data as background of div
+											input
+													.parent()
+													.parent()
+													.parent()
+													.prev('.imagePreview')
+													.css(
+															"background-image",
+															"url("
+																	+ this.result
+																	+ ")");
+										}
+									}
+								});
+			</script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 </body>
 
 </html>
