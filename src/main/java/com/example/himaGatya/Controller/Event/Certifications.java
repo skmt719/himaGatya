@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.himaGatya.Controller.Event;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

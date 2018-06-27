@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.himaGatya.Controller.Event;
 
 
 import java.util.List;
@@ -44,21 +44,21 @@ public class CustomerController {
 
 	////////////////////////////////////////////////////////
 	//
-	// 管理者側イベント一覧画面 (list)
+	// 管理者側イベント一覧画面 (index)
 	//
 	////////////////////////////////////////////////////////
 
-	@GetMapping("/admin/list")
+	@GetMapping("/admin")
 	public String eventsList(Model model) {
 		/*Events eventsForm = new Events();
 		model.addAttribute("events",eventsForm);*/
-		return "/eventsList";
+		return "/event/index";
 	}
-	@PostMapping("/admin/list")
+	@PostMapping("/admin")
 	public String eventsList(@ModelAttribute Events eventsForm) {
 		// table に上書き
 		eventServiceImpl.saveEvents(eventsForm);
-		return "/eventsList";
+		return "/event/index";
 	}
 
 	////////////////////////////////////////////////////////
@@ -71,14 +71,14 @@ public class CustomerController {
 	public String eventsEdit(Model model) {
 		Events eventsForm = new Events();
 		model.addAttribute("eventsForm",eventsForm);
-		return "/edit";
+		return "/event/edit";
 	}
 	// データ登録 save ボタン処理
 	@PostMapping(value="/admin/edit" , params="save")
 	public String eventsEdit(@ModelAttribute Events eventsForm , BindingResult bindingresult) {
 		// table に上書き
 		eventServiceImpl.saveEvents(eventsForm);
-		return "/list";
+		return "/event/index";
 	}
 	// データ削除
 /*	@PostMapping("/admin/list")

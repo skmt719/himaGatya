@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.himaGatya.Controller.Event;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

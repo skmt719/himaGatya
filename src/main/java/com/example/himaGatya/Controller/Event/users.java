@@ -1,4 +1,4 @@
-package com.example.entity;
+package com.example.himaGatya.Controller.Event;
 
 
 import java.sql.Timestamp;
