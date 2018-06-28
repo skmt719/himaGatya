@@ -26,7 +26,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "loginAuth";
     }
 
     @PostMapping("/login")
@@ -37,7 +37,7 @@ public class AuthController {
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login";
+        return "loginAuth";
     }
     
     @GetMapping("/signup")
