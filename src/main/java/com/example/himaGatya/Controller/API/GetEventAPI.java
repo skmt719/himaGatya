@@ -11,7 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import com.example.himaGatya.Controller.API.Events;
+
+
+
+
 
 
 
@@ -21,7 +24,7 @@ abstract class GetEventAPI<T> {
 
 	public void ReadAPI(String request,String dirname) {
 		//リクエストのURLをもとにjsonデータをテキストファイルに保存
-		
+
 		try {
 			//URL url = new URL("http://api.atnd.org/events/?event_id=97895,97897,97899&format=json");
 			URL url = new URL(request);
@@ -36,11 +39,11 @@ abstract class GetEventAPI<T> {
 			// TODO 自動生成された catch ブロック
 			return;
 		}
-		return; 
-		
-		
+		return;
+
+
 	}
-	
+
 	public String WriteAPI(String filename) {
 		//テキストファイルからjsonデータをString型に読み込む
 		String result = null;
@@ -53,7 +56,7 @@ abstract class GetEventAPI<T> {
 	        if (!file.exists()) {
 	            return "ファイルが存在しません";
 	        }
-	     
+
 	        // BufferedReaderクラスのreadLineメソッドを使って1行ずつ読み込む
 	        BufferedReader bufferedReader = new BufferedReader(fileReader);
 	        StringBuilder builder = new StringBuilder();
@@ -67,17 +70,17 @@ abstract class GetEventAPI<T> {
 	        }
 	        result = builder.substring(0, builder.length() - 1);
 	        //return "size = " + list.size();
-	        
+
 	    } catch (IOException e) {
 	    	e.printStackTrace();
 	        return "ファイルが作れませんでした";
 	    }
-	
-		return result;	
+
+		return result;
 	}
-	
+
 	String convertUnicode(String data) {
-		
+
 		//最初に出てきたUnicode文字を中心に前後の3つに分ける　例　aaaa \ubbbb ccccc
 		String front,unicode,back;
 		if(data==null) return data;
@@ -85,11 +88,11 @@ abstract class GetEventAPI<T> {
 			front = data.substring(0,data.indexOf("\\u"));
 			unicode = data.substring(data.indexOf("\\u"),data.indexOf("\\u") + 6);
 			back = data.substring(data.indexOf("\\u")+6);
-			
+
 			//切り出したUnicode文字を変換
 			String encodedUnicode;
 			encodedUnicode = convertToOriginal(unicode);
-			
+
 			//後ろの文字列で再帰
 			String resultBack;
 			resultBack = convertUnicode(back);
@@ -101,7 +104,7 @@ abstract class GetEventAPI<T> {
 		//unicode文字がなければそのまま返す
 		return data;
 	}
-	
+
 	protected static String convertToOriginal(String unicode)
 	{
 	    String[] codeStrs = unicode.split("\\\\u");
@@ -112,13 +115,13 @@ abstract class GetEventAPI<T> {
 	    String encodedText = new String(codePoints, 0, codePoints.length);
 	    return encodedText;
 	}
-	
+
 	//リクエストクエリの作成
 	abstract String CreateRequestURL();
-	
+
 	//必要なデータへの整形
 	abstract String ShapingString(String data);
-	
+
 	//Beanに書き込んだデータのBeanへの書き込み
 	abstract T[] StrageData(String str);
 }
