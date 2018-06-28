@@ -10,3 +10,4 @@ public class HimaGatyaApplication {
 		SpringApplication.run(HimaGatyaApplication.class, args);
 	}
 }
+
