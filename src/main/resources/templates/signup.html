@@ -9,7 +9,7 @@
 
 <form action="#" th:action="@{/signup}" th:object="${signupForm}" method="post">
     <p th:if="${signupError}"><em>Username or mail address is already used.</em></p>
-    
+
     <p><label for="username">Username</label>:
        <input type="text" id="username" name="username" autofocus="autofocus" />
        <em th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</em></p>
