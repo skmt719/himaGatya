@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.himaGatya.Controller.Event.EventsServiceImpl;
+
 @Controller
 public class CustomerController {
 
@@ -18,7 +20,14 @@ public class CustomerController {
 	@Autowired
 	CertificationsServiceImpl certificationsServiceImpl;
 	@Autowired
+	Event_create_logsServiceImpl event_create_logsServiceImpl;
+	@Autowired
 	EventsServiceImpl eventServiceImpl;
+	@Autowired
+	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
+	@Autowired
+	UsersServiceImpl usersServiceImpl;
+
 
 
 	////////////////////////////////////////////////////////
