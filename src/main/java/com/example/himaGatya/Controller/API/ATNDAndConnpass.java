@@ -1,62 +1,8 @@
-package com.example.himaGatya.Controller;
+package com.example.himaGatya.Controller.API;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+public class ATNDAndConnpass {
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-public class FromATND<T> extends GetEventAPI<T> {
-
-	@Override
-	String CreateRequestURL() {
-		Date date = new Date();
-		String ymd = new SimpleDateFormat("yyyyMMdd").format(date);
-		String request = String.format("http://api.atnd.org/events/?count=100&ymd=%s&format=json",ymd);
-		
-		return request;
-	}
-	
-	@Override
-	String ShapingString(String data) {
-		String[] tmp = data.split("\\{");
-		StringBuilder res = new StringBuilder();
-		for(int i = 3;i<tmp.length;i+=2) {
-			res.append("{")
-				.append(tmp[i].substring(0, tmp[i].indexOf("\"lat\"")-1))
-				.append("},")
-				.insert(res.lastIndexOf("\"event_id\"") + 11, "\"")
-				.insert(res.lastIndexOf("\"title\"") - 1, "\"")
-				.insert(res.lastIndexOf("\"limit\"") + 8, "\"")
-				.insert(res.lastIndexOf("\"address\"") - 1, "\"");
-			System.out.println(tmp[i]);
-		}
-		
-		String result = new String(res.toString());
-		System.out.println(result);
-		return "[" + result.replaceAll(",$", "").replace("\"catch\"","\"catchcopy\"") + "]";
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	T[] StrageData(String str) {
-
-		final ObjectMapper jsonMapper = new ObjectMapper();
-		ATND[] result = null;
-		System.out.println(str);
-		try {
-			result = jsonMapper.readValue(str,ATND[].class);
-		} catch (IOException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}		
-		return (T[])result;
-	}
-
-	static class ATND {
-		private Integer event_id;
-		
+		private Integer event_id;		
 		private String title;
 		private String catchcopy;
 		private String description;
@@ -136,4 +82,3 @@ public class FromATND<T> extends GetEventAPI<T> {
 		}
 		
 	}
-}

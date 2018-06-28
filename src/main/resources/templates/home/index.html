@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ホーム</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    input[type=radio] {
+      display: none;
+      /* ラジオボタンを非表示にする */
+    }
+
+    input[type="radio"]:checked+label {
+      background: #6C757D;
+      /* マウス選択時の背景色を指定する */
+      color: #ffffff;
+      /* マウス選択時のフォント色を指定する */
+    }
+
+    label:hover {
+      background-color: #d1d3d6;
+      /* マウスオーバー時の背景色を指定する */
+    }
+
+    label {
+      display: block;
+      /* ブロックレベル要素化する */
+      float: left;
+      /* 要素の左寄せ・回り込を指定する */
+      margin: 5px;
+      /* ボックス外側の余白を指定する */
+      width: 100px;
+      /* ボックスの横幅を指定する */
+      height: 45px;
+      /* ボックスの高さを指定する */
+      padding-left: 5px;
+      /* ボックス内左側の余白を指定する */
+      padding-right: 5px;
+      /* ボックス内御右側の余白を指定する */
+      color: #ffffff;
+      /* フォントの色を指定 */
+      text-align: center;
+      /* テキストのセンタリングを指定する */
+      line-height: 45px;
+      /* 行の高さを指定する */
+      cursor: pointer;
+      /* マウスカーソルの形（リンクカーソル）を指定する */
+      border: 2px solid #6C757D;
+      /* ボックスの境界線を実線で指定する */
+      border-radius: 5px;
+      /* 角丸を指定する */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="p-3 mb-2 bg-warning text-black">
+    <div class="container">
+      <div class="card">
+        <h5 class="card-header">EVENT TITLE</h5>
+        <div class="card-body">
+          *********************************
+
+          <div class="row">
+            <div class="col-sm-4 col-md-4">
+              <a href="#" class="card"><img class="card-img" src="..." alt="..."></a>
+              <br>
+              <div>
+                <form action="">
+                  <a class="btn btn-primary" href="#" role="button">イベントを見る🌝</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <form action="radio.php" method="post">
+          <input type="radio" name="myhome" value="1" id="home">
+          <label for="home">Home</label>
+          <input type="radio" name="myhome" value="2" id="mypage">
+          <label for="mypage">My Page</label>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+</body>
+
+</html>

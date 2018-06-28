@@ -1,4 +1,4 @@
-package com.example.himaGatya.Controller;
+package com.example.himaGatya.Controller.API;
 
 import java.sql.Date;
 import java.sql.Timestamp;
