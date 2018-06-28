@@ -18,7 +18,17 @@ public class CustomerController {
 	@Autowired
 	CertificationsServiceImpl certificationsServiceImpl;
 	@Autowired
+<<<<<<< Updated upstream
 	EventsServiceImpl eventServiceImpl;
+=======
+	Event_create_logsServiceImpl event_create_logsServiceImpl;
+	@Autowired
+	EventsServiceImpl eventServiceImpl;
+	@Autowired
+	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
+	@Autowired
+	UsersServiceImpl usersServiceImpl;
+>>>>>>> Stashed changes
 
 
 	////////////////////////////////////////////////////////
