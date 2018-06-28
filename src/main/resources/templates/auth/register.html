@@ -14,7 +14,7 @@ body {
 </head>
 
 <body>
-	<form method="POST" action="auth/register">
+	<form method="POST" action="auth/register" th:object="${formModel}">
 		<div class="p-3 mb-2 bg-warning text-black">
 			<div class="container-fluid">
 				<div class="col-xs-12 col-lg-12 col-xs-6">
@@ -22,7 +22,7 @@ body {
 						<h3>新規登録</h3>
 					</div>
 					<br>
-					
+
 					<div class="row justify-content-center">
 						<div class="col-sm-2">User Name</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
@@ -30,7 +30,7 @@ body {
 								placeholder="nickname" name="userName" size="30">
 						</div>
 					</div>
-					
+
 					<div class="row justify-content-center">
 						<div class="col-sm-2">Email*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
@@ -49,7 +49,7 @@ body {
 						<div class="col-sm-2">Mation password*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="text" class="form-control input-sm" id="password"
-								placeholder="mation password*" name="password" size="20">
+								placeholder="mation password*" name="conf_password" size="20">
 						</div>
 					</div>
 
@@ -88,6 +88,20 @@ body {
 
 		</div>
 	</form>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>email</th>
+			<th>password</th>
+			<th>conform password</th>
+		</tr>
+		<tr th:each="obj : userdata">
+			<td th:text"${obj.name}" /></td>
+			<td th:text"${obj.email}" /></td>
+			<td th:text"${obj.password}" /></td>
+			<td th:text"${obj.conf_password}" /></td>
+		</tr>
+	</table>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script
