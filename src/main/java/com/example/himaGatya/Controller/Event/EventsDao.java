@@ -10,4 +10,6 @@ public interface EventsDao extends JpaRepository <Events, Long> {
 
 	public List<Events> findAll();
 
+	public List<Events> findById(long id);
+
 }
