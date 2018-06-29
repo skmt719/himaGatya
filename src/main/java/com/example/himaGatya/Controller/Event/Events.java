@@ -66,6 +66,14 @@ public class Events {
 	@Column
 	private boolean is_deleted;
 
+	
+	public Events() {
+		this.name = "no-name";
+		this.summary = "no-data";
+		this.address = "no-address";
+		
+	}
+	
 	public long getId() {
 		return id;
 	}

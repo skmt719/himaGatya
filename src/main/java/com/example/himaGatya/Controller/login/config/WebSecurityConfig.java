@@ -6,9 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 //import com.example.himaGatya.CertificationService;
@@ -28,8 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasRole("USER")
                 .and()
             .formLogin()
-                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/",false)
-                ;//.usernameParameter("mailAddress");
+                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/",false);
     }
 
     @Override
@@ -38,42 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.userDetailsService(userService)
         	.passwordEncoder(passwordEncoder());
 
-        //userService.registerAdmin("admin", "youmustchangethis", "admin@localhost");
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	//return NoOpPasswordEncoder.getInstance();
+
         return new BCryptPasswordEncoder();
     }
 
 }
 
-//@EnableWebSecurity
-//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeRequests()
-//                .antMatchers("/", "/login", "/login-error").permitAll()
-//                .antMatchers("/**").hasRole("USER")
-//                .and()
-//            .formLogin()
-//                .loginPage("/login").failureUrl("/login-error");
-//    }
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//            .inMemoryAuthentication()
-//                .withUser("user").password("{noop}password").roles("USER");
-//    }
-//    
-//    @SuppressWarnings("deprecation")
-//	@Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-//
-//}
+
