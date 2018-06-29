@@ -76,10 +76,16 @@
 		    <artifactId>org.apache.commons.io</artifactId>
 		    <version>2.4</version>
 		</dependency>
+<<<<<<< Updated upstream
 		
 		
 		<!-- 坂本：ログイン処理に必要なもの：追加はじめ -->
 		
+=======
+
+		
+		<!-- 坂本：ログイン処理に必要なもの：追加はじめ -->
+>>>>>>> Stashed changes
 		  <dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
@@ -92,8 +98,12 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>	
 			<version>2.1.2.RELEASE</version>
+<<<<<<< Updated upstream
 		  </dependency>
 		  
+=======
+		  </dependency>		  
+>>>>>>> Stashed changes
 		  <!-- 坂本：ログイン処理に必要なもの：追加終わり -->
 		  
 		  <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -111,7 +121,10 @@
 			
 		  
 
+<<<<<<< Updated upstream
 		  
+=======
+>>>>>>> Stashed changes
 	</dependencies>
 
 	<build>

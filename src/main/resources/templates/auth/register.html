@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -14,7 +13,11 @@ body {
 </head>
 
 <body>
+<<<<<<< Updated upstream
 	<form method="POST" action="auth/register">
+=======
+	<form method="POST" th:action="@{/signup}" th:object="${signupForm}" method="post">
+>>>>>>> Stashed changes
 		<div class="p-3 mb-2 bg-warning text-black">
 			<div class="container-fluid">
 				<div class="col-xs-12 col-lg-12 col-xs-6">
@@ -22,12 +25,18 @@ body {
 						<h3>新規登録</h3>
 					</div>
 					<br>
+<<<<<<< Updated upstream
 					
+=======
+
+					<p th:if="${signupError}"><em>Username or mail address is already used.</em></p>
+>>>>>>> Stashed changes
 					<div class="row justify-content-center">
 						<div class="col-sm-2">User Name</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="text" class="form-control input-sm" id="name"
-								placeholder="nickname" name="userName" size="30">
+								placeholder="nickname" name="username" autofocus="autofocus" size="30">
+								<p><em th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</em></p>
 						</div>
 					</div>
 					
