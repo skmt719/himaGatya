@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AuthController {
-	
+
 	@Autowired
     CertificationsService CertificationService;
 
@@ -26,7 +26,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "loginAuth";
+        return "auth/login";
     }
 
     @PostMapping("/login")
@@ -34,18 +34,19 @@ public class AuthController {
         return "redirect:/login-error";
     }
 
-   
+
+
 
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "loginAuth";
     }
-    
-    @GetMapping("/signup")
+
+    @GetMapping("/signUp")
     public String signup(Model model) {
         model.addAttribute("signupForm", new SignupForm());
-        return "signup";
+        return "auth/register";
     }
 
     @PostMapping("/signup")

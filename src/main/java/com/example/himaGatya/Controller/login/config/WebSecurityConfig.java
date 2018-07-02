@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	// 認可の設定
     		http.authorizeRequests()
-                .antMatchers( "/signup", "/login", "/login-error").permitAll()
+                .antMatchers( "/signUp", "/login", "/login-error").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/home/**").hasRole("USER")
                 .antMatchers("/**").hasRole("ADMIN")
@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	        http.logout()
 	        	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))       // ログアウト処理のパス
 	        	.logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID")
-	        	.permitAll();  
+	        	.permitAll();
     }
 
     @Override
@@ -51,9 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth
         	.userDetailsService(certificationService)
         	.passwordEncoder(passwordEncoder());
-        
-        certificationService.registerUser("username", "password", "mail@Address");
-        certificationService.registerAdmin("admin", "adminadmin", "admin@admin");
+
+        //certificationService.registerUser("username", "password", "mail@Address");
+        //certificationService.registerAdmin("admin", "adminadmin", "admin@admin");
 
     }
 
