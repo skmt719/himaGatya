@@ -11,12 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 //import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-@Table(name="users")
-
 // import javax.xml.bind.annotation.XmlRootElement; を追加
 //@XmlRootElement
-public class users {
+@Entity
+@Table(name="users")
+public class Users {
 
 
 	@Id
@@ -26,6 +25,9 @@ public class users {
 
 	@Column
 	private String name;
+
+	@Column
+	private String email;
 
 	@Column
 	private int sex;
@@ -59,6 +61,14 @@ public class users {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getSex() {

@@ -15,58 +15,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AuthController {
-	
+
 	@Autowired
-    UserService userService;
+	UserService userService;
 
-    @RequestMapping("/")
-    public String index() {
-        return "redirect:/messages";
-    }
+	@RequestMapping("/")
+	public String index() {
+		return "redirect:/home/1";
+	}
 
-    @GetMapping("/login")
-    public String login() {
-        return "loginAuth";
-    }
+	@GetMapping("/login")
+	public String login() {
+		return "auth/login";
+	}
 
-    @PostMapping("/login")
-    public String loginPost() {
-        return "redirect:/login-error";
-    }
+	@PostMapping(value="/login" , params="login")
+	public String loginPost() {
+		return "redirect:/login";
+	}
+	@PostMapping(value="/login" , params="signUp")
+	public String jumpToSignup(Model model) {
 
-    @GetMapping("/login-error")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "loginAuth";
-    }
-    
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("signupForm", new SignupForm());
-        return "signup";
-    }
+		return "signUp";
+	}
 
-    @PostMapping("/signup")
-    public String signupPost(Model model, @Valid SignupForm signupForm, BindingResult bindingResult, HttpServletRequest request) {
-        if (bindingResult.hasErrors()) {
-            return "signup";
-        }
 
-        try {
-            userService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
-        } catch (DataIntegrityViolationException e) {
-            model.addAttribute("signupError", true);
-            return "signup";
-        }
+/*	@GetMapping("/login-error")
+	public String loginError(Model model) {
+		model.addAttribute("loginError", true);
+		return "auth/login";
+	}*/
 
-        try {
-            request.login(signupForm.getMailAddress(), signupForm.getPassword());
-        } catch (ServletException e) {
-            e.printStackTrace();
-        }
+	@GetMapping("/signUp")
+	public String signup(Model model) {
+		model.addAttribute("signupForm", new SignupForm());
+		return "auth/register";
+	}
 
-        return "redirect:/messages";
-    }
+	@PostMapping("/signUp")
+	public String signupPost(Model model, @Valid SignupForm signupForm, BindingResult bindingResult, HttpServletRequest request) {
+
+		if (bindingResult.hasErrors()) {
+			return "auth/register";
+		}
+
+		try {
+			userService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
+		}
+		catch (DataIntegrityViolationException e) {
+			model.addAttribute("signupError", true);
+			return "auth/register";
+		}
+
+		try {
+			request.login(signupForm.getMailAddress(), signupForm.getPassword());
+		}
+		catch (ServletException e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/messages";
+	}
 
 
 }
