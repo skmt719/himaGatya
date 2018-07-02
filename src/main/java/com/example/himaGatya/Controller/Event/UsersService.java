@@ -2,12 +2,14 @@ package com.example.himaGatya.Controller.Event;
 
 import java.util.List;
 
+import com.example.himaGatya.Controller.login.Certifications;
+
 public interface UsersService {
 
-	public Certifications getCertificationsById(long id);
+	public Users getUsersById(long id);
 
-	public List<Certifications> getCertificationsList();
+	public List<Users> getUsersList();
 
-	public void saveCertifications(Certifications certifications);
+	public void saveUsers(Users certifications);
 
 }

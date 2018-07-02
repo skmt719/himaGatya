@@ -18,15 +18,13 @@ public class CustomerController {
 
 	// Impl 定義
 	@Autowired
-	CertificationsServiceImpl certificationsServiceImpl;
-	@Autowired
 	Event_create_logsServiceImpl event_create_logsServiceImpl;
 	@Autowired
 	EventsServiceImpl eventServiceImpl;
 	@Autowired
 	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
 	@Autowired
-	UsersServiceImpl usersServiceImpl;
+
 
 
 
@@ -36,12 +34,7 @@ public class CustomerController {
 	//
 	////////////////////////////////////////////////////////
 	// Certifications entity
-	@GetMapping("/view/certifications")
-	public String lists(Model model) {
-		List<Certifications> customers = certificationsServiceImpl.getCertificationsList();
-		model.addAttribute("customers", customers);
-		return "/test";
-	}
+
 	// Events entity
 	@GetMapping("/view/events")
 	public String eventCheck(Model model) {
