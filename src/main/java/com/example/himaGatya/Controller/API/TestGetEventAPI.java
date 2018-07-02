@@ -81,7 +81,7 @@ public class TestGetEventAPI {
 			//System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
 		}                                                                                
 		for(EventonAndEmoshicom r : ArrayEventon) {      
-			/*
+			
 			event.setName(r.getTitle());
 			event.setSummary(r.getSummary());
 			event.setAddress(r.getAddress());
@@ -92,7 +92,7 @@ public class TestGetEventAPI {
 			event.setManager_id(-1);
 			event.setEvent_url(r.getEvent_url());
 			event.setSite_url(r.getUrl());
-			*/
+			
 			eventServiceImpl.saveEvents(event);
 
 			

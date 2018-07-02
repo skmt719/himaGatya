@@ -60,7 +60,7 @@ public class AuthController {
         }
 
         try {
-            request.login(signupForm.getUsername(), signupForm.getPassword());
+            request.login(signupForm.getMailAddress(), signupForm.getPassword());
         } catch (ServletException e) {
             e.printStackTrace();
         }

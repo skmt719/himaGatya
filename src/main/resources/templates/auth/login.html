@@ -1,5 +1,6 @@
 <DOCTYPE html>
   <html lang="ja">
+  <html xmlns:th="http://www.thymeleaf.org">
 
   <head>
     <meta charset="utf-8">
@@ -23,21 +24,24 @@
           <br>
           <div class="row justify-content-center">
             <div class="card card-body bg-light">
-              <form>
+              <form th:action="@{/login}" method="post">
                 <div class="form-group">
+                  <p th:if="${loginError}"><em>Mail Address or password is wrong. hello</em></p>
                   <label for="exampleInputEmail1">Mail Address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="email@sample.com">
+                  <!-- <input type="text" name="username" class="form-control" id="exampleInputEmail1"> -->
+               
                 </div>
                 <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="Id" name="username">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
                 </div>
-                <div class="form-group form-check">
+                <!-- <div class="form-group form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">記憶する</label>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-secondary">ログイン</button>
-                <button type="submit" class="btn btn-danger">新規登録</button>
+                <button th:href="@{/signup}" class="btn btn-danger">新規登録</button>
               </form>
             </div>
           </div>
