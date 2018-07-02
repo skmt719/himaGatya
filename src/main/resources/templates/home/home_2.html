@@ -105,22 +105,24 @@ label {
 
 					<div class="card">
 						<h5 class="card-header">今日のガチャ引いてないよ？</h5>
-						<div class="card-body">
-							<div class="row justify-content-around">
-								<div class="col-4">
-									<img src="/img/touchme1.png" width="" height="100" alt=""
-										border="0" align="center" hspace="10" vspace="10">
+						<form action="#" th:action="@{/home/2}" method="post">
+							<button type="submit" name="gacha" class="card-body">
+								<div class="row justify-content-around">
+									<div class="col-4">
+										<img th:src="*{imageUrl}" src="/img/touchme1.png" width="" height="100" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
+									<div class="col-4">
+										<img src="/img/gachagacha.png" width="" height="300" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
+									<div class="col-4">
+										<img src="/img/touchme2.png" width="" height="150" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
 								</div>
-								<div class="col-4">
-									<img src="/img/gachagacha.png" width="" height="300" alt=""
-										border="0" align="center" hspace="10" vspace="10">
-								</div>
-								<div class="col-4">
-									<img src="/img/touchme2.png" width="" height="150" alt=""
-										border="0" align="center" hspace="10" vspace="10">
-								</div>
-							</div>
-						</div>
+							</button>
+						</form>
 					</div>
 
 					<br>

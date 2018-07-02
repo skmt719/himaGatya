@@ -2,6 +2,7 @@ package com.example.himaGatya.Controller.Event;
 
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class CustomerController {
 	// Impl 定義
 	@Autowired
 	Event_create_logsServiceImpl event_create_logsServiceImpl;
+	@Autowired
+	UsersServiceImpl usersServiceImpl;
 	@Autowired
 	EventsServiceImpl eventServiceImpl;
 	@Autowired
@@ -70,6 +73,39 @@ public class CustomerController {
 	@PostMapping(value="/home/2" , params="myPage")
 	public String home_two_jumpToMyPage() {
 		return "myPage/2";
+	}
+
+	// ガチャを引いたとき
+	@PostMapping(value="/home/2" , params="gacha")
+	public String gachaRoll(
+						Model model ,
+						@ModelAttribute EventsForm form ,
+						@ModelAttribute Users users ,
+						BindingResult bindingresult) {
+		List<Events> gachaResult = null;							// ガチャ結果を保存するリスト
+        long[] EventIdLists = null;									// EventListsのidのみ取得する変数
+		List<Events> EventLists = eventServiceImpl.getEventsList();	// 全イベントをリストとして取得
+		int NumOfAllEvents = EventLists.size();						// イベントの総数を取得
+		for(int l = 0; l < 3; l ++) {								// 三回行う
+			// 乱数生成(イベントの総数を超えないよう調整)
+			Random rand = new Random();
+	        int randomNum = rand.nextInt(NumOfAllEvents);			// 0番目のイベントも含める
+	        for ( int i = 0; i < EventLists.size(); ++i ) {
+	        	EventIdLists[i] = EventLists.get( i ).getId();
+	        }
+	        gachaResult.add( eventServiceImpl.getEventsById(EventIdLists[randomNum]) );	// 乱数を用いてイベントのid取得、代入
+		}
+
+		// ユーザーのイベントテーブルにガチャの結果を追加
+		// List<Events> userEvents;
+		// for( int n = 0; n < gachaResult.size(); n ++ )
+		// 	userEvents.add( gachaResult[0] );
+		//
+		// ガチャ結果を削除
+		// gachaResult = null;
+
+		// ガチャ演出画面へ遷移
+		return "home/gacha";
 	}
 
 	////////////////////////////////////////////////////////
