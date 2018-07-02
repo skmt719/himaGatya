@@ -17,7 +17,7 @@ public class TestGetEventAPI {
 	@Autowired
 	EventsServiceImpl eventServiceImpl;
 
-	@RequestMapping("/TestAPI")
+	@RequestMapping("/admin/TestAPI")
 	public String FromAPI() {
 		GetEventAPI<ATNDAndConnpass> atnd = new FromATND<>() ;
 		GetEventAPI<EventonAndEmoshicom> eventon = new FromEventon<>();
@@ -47,6 +47,9 @@ public class TestGetEventAPI {
 		data = atnd.WriteAPI(filenameATND);
 		result = atnd.ShapingString(data);
 		ArrayATND = atnd.StrageData(result);
+		for(ATNDAndConnpass r : ArrayATND) {
+			eventServiceImpl.saveEvents(atnd.Save(r));
+		}
 		
 		
 		//Eventon接続テスト
@@ -59,7 +62,7 @@ public class TestGetEventAPI {
 		ArrayEventon = eventon.StrageData(result);
 		//eventon.SaveTable(ArrayEventon);
 		for(EventonAndEmoshicom r : ArrayEventon) {
-		eventServiceImpl.saveEvents(eventon.Save(r));
+			eventServiceImpl.saveEvents(eventon.Save(r));
 		}
  
 		
@@ -72,6 +75,9 @@ public class TestGetEventAPI {
 		data = connpass.WriteAPI(filenameConnpass);
 		result = connpass.ShapingString(data);
 		ArrayConnpass = connpass.StrageData(result);
+		for(ATNDAndConnpass r : ArrayConnpass) {
+			eventServiceImpl.saveEvents(connpass.Save(r));
+		}
 		
 		
 		//Emoshicom接続テスト
@@ -81,45 +87,14 @@ public class TestGetEventAPI {
 		data = Emoshicom.WriteAPI(filenameEmoshicom);
 		result = Emoshicom.ShapingString(data);
 		ArrayEmoshicom = Emoshicom.StrageData(result);
-		
-		
-		
-		for(ATNDAndConnpass r : ArrayATND) {
-			//System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
-		}                                                                               
-		for(EventonAndEmoshicom r : ArrayEventon) {    
-			
-			Events event = new Events();
-			
-			event.setName(r.getTitle());
-			event.setSummary(r.getSummary());
-			event.setAddress(r.getAddress());
-			event.setPlace(r.getPlace());
-			//event.setStart_on(Date.valueOf(r.getStarted_at()));
-			//event.setEnd_on(Date.valueOf(r.getEnded_at()));
-			//event.setStart_at(new Timestamp(Long.parseLong(r.getStarted_at())));
-			event.setStart_on(r.getStarted_at());
-			event.setEnd_on(r.getEnded_at());
-			event.setStart_at(r.getStarted_at());
-			event.setManager_id(-1);
-			event.setEvent_url(r.getEvent_url());
-			event.setCost(Integer.parseInt(r.getPrice()));
-			event.setSite_url(r.getUrl());
-
-			
-			eventServiceImpl.saveEvents(event);
-
-			
-			//System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
-		}                                                                                 
-		for(ATNDAndConnpass r : ArrayConnpass) {                                          
-			System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
-		}                                                                                   
-		for(EventonAndEmoshicom r : ArrayEmoshicom) {                                       
-			System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
+		for(EventonAndEmoshicom r : ArrayEmoshicom) {
+			eventServiceImpl.saveEvents(Emoshicom.Save(r));
 		}
+		
+		
+
 				
-		return result;
+		return "end";
 		
 		
 	}
