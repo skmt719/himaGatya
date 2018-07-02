@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface EventsService {
 
-	public Events getEventsById(long id);
+	public List<Events> getEventsById(long id);
 
 	public List<Events> getEventsList();
 

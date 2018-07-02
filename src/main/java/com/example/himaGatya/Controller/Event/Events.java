@@ -105,17 +105,21 @@ public class Events {
 	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean is_deleted;
 
+<<<<<<< HEAD
+
+=======
 	
 	
 	//////////////////////下記Getter,Setterの定義//////////////////////////////
 	
+>>>>>>> 05490d2b45ce0d0a16e43ef5442ef9f9f0b8b8e4
 	public Events() {
 		this.name = "no-name";
 		this.summary = "no-data";
 		this.address = "no-address";
-		
+
 	}
-	
+
 	public long getId() {
 		return id;
 	}

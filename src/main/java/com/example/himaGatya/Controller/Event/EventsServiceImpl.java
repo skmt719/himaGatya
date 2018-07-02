@@ -14,9 +14,9 @@ public class EventsServiceImpl implements EventsService {
 
 
 	@Override
-	public Events getEventsById(long id) {
+	public List<Events> getEventsById(long id) {
 		// TODO 自動生成されたメソッド・スタブ
-		return EventsDao.findById(id).orElse(null);
+		return EventsDao.findById(id);
 	}
 
 	@Override
