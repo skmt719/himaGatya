@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 // import javax.xml.bind.annotation.XmlRootElement; を追加
 //@XmlRootElement
-public class users {
+public class Users {
 
 
 	@Id
