@@ -21,7 +21,7 @@ public class AuthController {
 
     @RequestMapping("/")
     public String index() {
-        return "redirect:/messages";
+        return "redirect:/home";
     }
 
     @GetMapping("/login")
@@ -33,6 +33,8 @@ public class AuthController {
     public String loginPost() {
         return "redirect:/login-error";
     }
+
+   
 
     @GetMapping("/login-error")
     public String loginError(Model model) {
@@ -65,7 +67,7 @@ public class AuthController {
             e.printStackTrace();
         }
 
-        return "redirect:/messages";
+        return "redirect:/home";
     }
 
 
