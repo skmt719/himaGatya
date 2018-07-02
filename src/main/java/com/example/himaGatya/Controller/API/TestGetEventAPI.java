@@ -43,7 +43,7 @@ public class TestGetEventAPI {
 		//ATND接続テスト
 		
 		query = atnd.CreateRequestURL();
-		//atnd.ReadAPI(query, filenameATND);
+		atnd.ReadAPI(query, filenameATND);
 		data = atnd.WriteAPI(filenameATND);
 		result = atnd.ShapingString(data);
 		ArrayATND = atnd.StrageData(result);
@@ -52,7 +52,7 @@ public class TestGetEventAPI {
 		//Eventon接続テスト
 		
 		query = eventon.CreateRequestURL();
-		//eventon.ReadAPI(query, filenameEventon);
+		eventon.ReadAPI(query, filenameEventon);
 		data = eventon.WriteAPI(filenameEventon);
 		result = eventon.ShapingString(data);
 		ArrayEventon = eventon.StrageData(result);
@@ -61,7 +61,7 @@ public class TestGetEventAPI {
 		//connpass接続テスト
 		
 		query = connpass.CreateRequestURL();
-		//connpass.ReadAPI(query, filenameConnpass);
+		connpass.ReadAPI(query, filenameConnpass);
 		data = connpass.WriteAPI(filenameConnpass);
 		result = connpass.ShapingString(data);
 		ArrayConnpass = connpass.StrageData(result);
@@ -70,7 +70,7 @@ public class TestGetEventAPI {
 		//Emoshicom接続テスト
 		
 		query = Emoshicom.CreateRequestURL();
-		//Emoshicom.ReadAPI(query, filenameEmoshicom);
+		Emoshicom.ReadAPI(query, filenameEmoshicom);
 		data = Emoshicom.WriteAPI(filenameEmoshicom);
 		result = Emoshicom.ShapingString(data);
 		ArrayEmoshicom = Emoshicom.StrageData(result);
@@ -89,6 +89,9 @@ public class TestGetEventAPI {
 			//event.setStart_on(Date.valueOf(r.getStarted_at()));
 			//event.setEnd_on(Date.valueOf(r.getEnded_at()));
 			//event.setStart_at(new Timestamp(Long.parseLong(r.getStarted_at())));
+			event.setStart_on(r.getStarted_at());
+			event.setEnd_on(r.getEnded_at());
+			event.setStart_at(r.getStarted_at());
 			event.setManager_id(-1);
 			event.setEvent_url(r.getEvent_url());
 			event.setSite_url(r.getUrl());
