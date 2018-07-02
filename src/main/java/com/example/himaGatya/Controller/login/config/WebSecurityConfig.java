@@ -24,24 +24,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
+    	// 認可の設定
+    		http.authorizeRequests()
                 .antMatchers( "/signup", "/login", "/login-error").permitAll()
-                .antMatchers("/**").hasRole("USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/home/**").hasRole("USER")
+                .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/")
+                .authenticated().and().csrf().disable();
+    	// ログイン設定
+            http.formLogin()
+                .loginPage("/login").failureUrl("/login-error")
+                .defaultSuccessUrl("/home")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .and()
-            .formLogin()
-                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/");
-        http.logout()
-        	.logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))       // ログアウト処理のパス
-        	.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID")
-        	.permitAll();  
+                .and();
+         // ログアウト設定
+	        http.logout()
+	        	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))       // ログアウト処理のパス
+	        	.logoutSuccessUrl("/login").invalidateHttpSession(true).deleteCookies("JSESSIONID")
+	        	.permitAll();  
     }
 
     @Override
@@ -51,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.passwordEncoder(passwordEncoder());
         
         certificationService.registerUser("username", "password", "mail@Address");
+        certificationService.registerAdmin("admin", "adminadmin", "admin@admin");
 
     }
 

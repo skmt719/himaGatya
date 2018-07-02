@@ -17,7 +17,7 @@ public class TestGetEventAPI {
 	@Autowired
 	EventsServiceImpl eventServiceImpl;
 
-	@RequestMapping("/TestAPI")
+	@RequestMapping("/admin/TestAPI")
 	public String FromAPI() {
 		GetEventAPI<ATNDAndConnpass> atnd = new FromATND<>() ;
 		GetEventAPI<EventonAndEmoshicom> eventon = new FromEventon<>();
