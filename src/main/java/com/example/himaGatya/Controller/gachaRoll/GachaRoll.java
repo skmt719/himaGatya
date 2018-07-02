@@ -1,5 +1,6 @@
 package com.example.himaGatya.Controller.gachaRoll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.himaGatya.Controller.Event.Events;
 import com.example.himaGatya.Controller.Event.EventsServiceImpl;
+import com.example.himaGatya.Controller.Event.UsersRepository;
 
 
 //DBからランダムなデータを取得する
 
 @Controller
 public class GachaRoll {
+
+	@Autowired
+	UsersRepository usersRepository;
 
 	@Autowired
 	public EventsServiceImpl service;
@@ -32,7 +37,12 @@ public class GachaRoll {
 //DBから取得したデータをホーム画面に表示する
 	@GetMapping(value="/home")
 	public ModelAndView display(ModelAndView model) {
-		List<Events> customers = service.getEventsList();
+		List<Events> customerstmp = service.getEventsList();
+		List<Events> customers = new ArrayList<Events>();
+		Events eventstmp = new Events();
+		eventstmp = customerstmp.get(0);
+		eventstmp.setCost(0);
+		customers.add(eventstmp);
 		for ( Events a: customers) {
 			System.out.println(a.getName());
 		}
@@ -41,7 +51,10 @@ public class GachaRoll {
         return model;
 
 	}
-}
+
+
+
+	}
 
 /*@Controller
 class GachaRoll{

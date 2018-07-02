@@ -109,15 +109,15 @@
             <li data-target="#carouselOption1" data-slide-to="14"></li>
           </ol>
           <!-- スライドさせる画像の設定 -->
-          <div class="carousel-inner"  th:each="customer:${customers}">
+          <div class="carousel-inner"  th:each="customer, i :${customers}">
             <div class="carousel-item activeS">
               <img class="d-block w-100" th:src="${customer.image}" alt="第1イベント">
               <div class="carousel-caption d-none d-md-block">
-                <!-- <h1 class="card-header" th:text="${customer.name}"></h1>
-                <p th:text="${customer.summary}"></p> -->
-                <form action="">
-                  <!-- <a class="btn btn-primary" th:href="${customer$.event_url}" role="button">イベントを見る🌝</a> -->
-                </form>
+                 <h1 class="card-header" th:text="${customer.name}"></h1>
+                <p th:text="${customer.summary}"></p>
+
+                   <a class="btn btn-primary" th:href="${customer.event_url}" role="button">イベントを見る🌝</a>
+
                 <br>
               </div>
             </div>
