@@ -3,6 +3,7 @@ package com.example.himaGatya.Controller.API;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ public class TestGetEventAPI {
 	EventsServiceImpl eventServiceImpl;
 
 	@RequestMapping("/admin/TestAPI")
+	@Scheduled(cron = "${scheduler.cron}")
 	public String FromAPI() {
 		GetEventAPI<ATNDAndConnpass> atnd = new FromATND<>() ;
 		GetEventAPI<EventonAndEmoshicom> eventon = new FromEventon<>();
@@ -91,12 +93,8 @@ public class TestGetEventAPI {
 			eventServiceImpl.saveEvents(Emoshicom.Save(r));
 		}
 		
-		
-
-				
 		return "end";
-		
-		
+				
 	}
 	
 }
