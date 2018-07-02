@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.himaGatya.Controller.login.CertificationsService;
 
@@ -36,7 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .and()
             .formLogin()
-                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/home");
+                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/");
+        http.logout()
+        	.logoutRequestMatcher(new AntPathRequestMatcher("/logout**"))       // ログアウト処理のパス
+        	.logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID")
+        	.permitAll();  
     }
 
     @Override

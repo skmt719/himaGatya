@@ -13,14 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//import javax.xml.bind.annotation.XmlRootElement;
-
 @Entity
 @Table(name="Events")
-
-// import javax.xml.bind.annotation.XmlRootElement; を追加
-//@XmlRootElement
-
 
 public class Events {
 
