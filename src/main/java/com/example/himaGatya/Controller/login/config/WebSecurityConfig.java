@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.userDetailsService(certificationService)
         	.passwordEncoder(passwordEncoder());
         
-        userService.registerUser("username", "password", "mail@Address");
+        certificationService.registerUser("username", "password", "mail@Address");
 
     }
 
