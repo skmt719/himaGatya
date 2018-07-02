@@ -33,7 +33,7 @@ body {
 						<div class="col-sm-2">User Name</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="text" class="form-control input-sm" id="name"
-								placeholder="nickname" name="username" autofocus="autofocus" size="30">
+								placeholder="3～32文字以上 英数字_が使用可" name="username" autofocus="autofocus" size="30">
 								<p><em th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</em></p>
 						</div>
 					</div>
@@ -51,7 +51,7 @@ body {
 						<div class="col-sm-2">Password*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="text" class="form-control input-sm" id="password"
-								placeholder="password*" name="password" size="20">
+								placeholder="8文字以上*" name="password" size="20">
 						</div>
 					</div>
 					<!-- <div class="row justify-content-center">
