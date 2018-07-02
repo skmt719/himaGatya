@@ -9,9 +9,12 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import com.example.himaGatya.Controller.API.Events;
+
+import com.example.himaGatya.Controller.Event.Events;
+
 
 
 
@@ -48,7 +51,7 @@ abstract class GetEventAPI<T> {
 		String ymd = new SimpleDateFormat("yyyyMMdd").format(date);
 		File file = new File(filename + "\\" + ymd + ".txt");
 		// ファイルのパスを指定する
-	    try (FileReader fileReader = new FileReader(file);){
+	    try (FileReader fileReader = new FileReader(file)){
 	        // ファイルが存在しない場合に例外が発生するので確認する
 	        if (!file.exists()) {
 	            return "ファイルが存在しません";
@@ -119,6 +122,10 @@ abstract class GetEventAPI<T> {
 	//必要なデータへの整形
 	abstract String ShapingString(String data);
 	
-	//Beanに書き込んだデータのBeanへの書き込み
+	//読み込んだデータのインスタンスへの書き込み
 	abstract T[] StrageData(String str);
+	
+	//インスタンスに書き込んだデータのエンティティ及びデータベースへの書き込み
+	//abstract void SaveTable(T[] list);
+	abstract Events Save(T r);
 }

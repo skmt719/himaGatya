@@ -6,29 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsersServiceImpl implements CertificationsService {
+public class UsersServiceImpl implements UsersService {
 
 	@Autowired
-	CertificationsDao certificationsDao;
+	UsersDao usersDao;
 
 
 
 
 	@Override
-	public Certifications getCertificationsById(long id) {
+	public Users getUsersById(long id) {
 		// TODO 自動生成されたメソッド・スタブ
-		return certificationsDao.findById(id).orElse(null);
+		return usersDao.findById(id).orElse(null);
 	}
 
 	@Override
-	public List<Certifications> getCertificationsList() {
+	public List<Users> getUsersList() {
 		// TODO 自動生成されたメソッド・スタブ
-		return certificationsDao.findAll();
+		return usersDao.findAll();
 	}
 
 	@Override
-	public void saveCertifications(Certifications certifications) {
+	public void saveUsers(Users users) {
 		// TODO 自動生成されたメソッド・スタブ
-		certificationsDao.saveAndFlush(certifications);
+		usersDao.saveAndFlush(users);
 	}
 }

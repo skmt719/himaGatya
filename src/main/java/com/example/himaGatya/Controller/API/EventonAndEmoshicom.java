@@ -14,6 +14,7 @@ public class EventonAndEmoshicom {
 	private String address;
 	private String place;
 	private String event_url;
+	private String price;
 	public Integer getEvent_id() {
 		return event_id;
 	}
@@ -91,5 +92,11 @@ public class EventonAndEmoshicom {
 	}
 	public void setEvent_url(String event_url) {
 		this.event_url = event_url;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 }

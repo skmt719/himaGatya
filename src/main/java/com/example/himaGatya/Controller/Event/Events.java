@@ -1,6 +1,6 @@
 package com.example.himaGatya.Controller.Event;
 
-
+//import java.util.Date;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -10,14 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-//import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="Events")
-
-// import javax.xml.bind.annotation.XmlRootElement; を追加
-//@XmlRootElement
-
 
 public class Events {
 
@@ -27,45 +24,92 @@ public class Events {
 	@Column
 	private long id;
 
-	@Column
+	@Column(name="name", length = 256, nullable = false)
 	private String name;
 
-	@Column
+	@Column(name="summary", length = 4096, nullable = true)
 	private String summary;
 
-	@Column
+	@Column(name="image_path", length = 256, nullable = true)
 	private String image;
 
-	@Column
+	@Column(name="address", length = 32, nullable = true)
 	private String address;
 
-	@Column
+	@Column(name="place", length = 60, nullable = true)
 	private String place;
 
-	@Column
+	@Column(name="cost", nullable = false,  columnDefinition="int default 0")
 	private int cost;
 
-	@Column
-	private Date start_on;
+//	@Column(name="start_on")
+//	@Temporal(TemporalType.DATE)
+//	private java.sql.Date start_on;
+//
+//	@Column(name="end_on")
+//    @Temporal(TemporalType.DATE)
+//	private java.sql.Date end_on;
+//
+//	@Column(name="start_at")
+//    @Temporal(TemporalType.TIMESTAMP)
+//	private Timestamp start_at;
+	
+	@Column(name="start_on",  length = 256)
+	private String  start_on;
+	
+	public String getStart_on() {
+		return start_on;
+	}
 
-	@Column
-	private Date end_on;
+	public void setStart_on(String start_on) {
+		this.start_on = start_on;
+	}
 
-	@Column
-	private Timestamp start_at;
+	public String getEnd_on() {
+		return end_on;
+	}
 
-	@Column
+	public void setEnd_on(String end_on) {
+		this.end_on = end_on;
+	}
+
+	public String getStart_at() {
+		return start_at;
+	}
+
+	public void setStart_at(String start_at) {
+		this.start_at = start_at;
+	}
+
+	@Column(name="end_on",  length = 256)
+	private String  end_on;
+	
+	@Column(name="start_at",  length = 256)
+	private String  start_at;
+
+	@Column(name="manager_id")
 	private long manager_id;
 
-	@Column
+	@Column(length = 256, nullable = true)
 	private String event_url;
 
-	@Column
+	@Column(length = 256, nullable = true)
 	private String site_url;
 
-	@Column
+	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean is_deleted;
 
+	
+	
+	//////////////////////下記Getter,Setterの定義//////////////////////////////
+	
+	public Events() {
+		this.name = "no-name";
+		this.summary = "no-data";
+		this.address = "no-address";
+		
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -122,29 +166,31 @@ public class Events {
 		this.cost = cost;
 	}
 
-	public Date getStart_on() {
-		return start_on;
-	}
-
-	public void setStart_on(Date start_on) {
-		this.start_on = start_on;
-	}
-
-	public Date getEnd_on() {
-		return end_on;
-	}
-
-	public void setEnd_on(Date end_on) {
-		this.end_on = end_on;
-	}
-
-	public Timestamp getStart_at() {
-		return start_at;
-	}
-
-	public void setStart_at(Timestamp start_at) {
-		this.start_at = start_at;
-	}
+//	public Date getStart_on() {
+//		return start_on;
+//	}
+//
+//	public void setStart_on(Date start_on) {
+//		this.start_on = start_on;
+//	}
+//
+//	public Date getEnd_on() {
+//		return end_on;
+//	}
+//
+//	public void setEnd_on(Date end_on) {
+//		this.end_on = end_on;
+//	}
+//
+//	public Timestamp getStart_at() {
+//		return start_at;
+//	}
+//
+//	public void setStart_at(Timestamp start_at) {
+//		this.start_at = start_at;
+//	}
+	
+	
 
 	public long getManager_id() {
 		return manager_id;
