@@ -37,13 +37,13 @@ public class TestGetEventAPI {
 		String filenameConnpass = "FromAPI\\Connpass";
 		String filenameEmoshicom = "FromAPI\\Emoshicom";
 		
-		Events event = new Events();
+		
 		 
 
 		//ATND接続テスト
 		
 		query = atnd.CreateRequestURL();
-		atnd.ReadAPI(query, filenameATND);
+		//atnd.ReadAPI(query, filenameATND);
 		data = atnd.WriteAPI(filenameATND);
 		result = atnd.ShapingString(data);
 		ArrayATND = atnd.StrageData(result);
@@ -52,16 +52,23 @@ public class TestGetEventAPI {
 		//Eventon接続テスト
 		
 		query = eventon.CreateRequestURL();
-		eventon.ReadAPI(query, filenameEventon);
+		//eventon.ReadAPI(query, filenameEventon);
 		data = eventon.WriteAPI(filenameEventon);
 		result = eventon.ShapingString(data);
+		System.out.println(result);
 		ArrayEventon = eventon.StrageData(result);
+		//eventon.SaveTable(ArrayEventon);
+		for(EventonAndEmoshicom r : ArrayEventon) {
+		eventServiceImpl.saveEvents(eventon.Save(r));
+		}
+ 
+		
 		
 		
 		//connpass接続テスト
 		
 		query = connpass.CreateRequestURL();
-		connpass.ReadAPI(query, filenameConnpass);
+		//connpass.ReadAPI(query, filenameConnpass);
 		data = connpass.WriteAPI(filenameConnpass);
 		result = connpass.ShapingString(data);
 		ArrayConnpass = connpass.StrageData(result);
@@ -70,7 +77,7 @@ public class TestGetEventAPI {
 		//Emoshicom接続テスト
 		
 		query = Emoshicom.CreateRequestURL();
-		Emoshicom.ReadAPI(query, filenameEmoshicom);
+		//Emoshicom.ReadAPI(query, filenameEmoshicom);
 		data = Emoshicom.WriteAPI(filenameEmoshicom);
 		result = Emoshicom.ShapingString(data);
 		ArrayEmoshicom = Emoshicom.StrageData(result);
@@ -79,8 +86,10 @@ public class TestGetEventAPI {
 		
 		for(ATNDAndConnpass r : ArrayATND) {
 			//System.out.println(r.getEvent_id() + ":" +r.getTitle()+"Address:"+r.getAddress()+"Place:"+ r.getPlace());
-		}                                                                                
-		for(EventonAndEmoshicom r : ArrayEventon) {      
+		}                                                                               
+		for(EventonAndEmoshicom r : ArrayEventon) {    
+			
+			Events event = new Events();
 			
 			event.setName(r.getTitle());
 			event.setSummary(r.getSummary());
@@ -94,7 +103,9 @@ public class TestGetEventAPI {
 			event.setStart_at(r.getStarted_at());
 			event.setManager_id(-1);
 			event.setEvent_url(r.getEvent_url());
+			event.setCost(Integer.parseInt(r.getPrice()));
 			event.setSite_url(r.getUrl());
+
 			
 			eventServiceImpl.saveEvents(event);
 
