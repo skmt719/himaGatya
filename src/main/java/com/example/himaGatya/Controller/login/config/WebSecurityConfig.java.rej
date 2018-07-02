@@ -1,0 +1,9 @@
+diff a/src/main/java/com/example/himaGatya/Controller/login/config/WebSecurityConfig.java b/src/main/java/com/example/himaGatya/Controller/login/config/WebSecurityConfig.java	(rejected hunks)
+@@ -42,6 +42,7 @@
+         	.userDetailsService(userService)
+         	.passwordEncoder(passwordEncoder());
+         
++        userService.registerUser("username", "password", "mail@Address");
+ 
+     }
+ 

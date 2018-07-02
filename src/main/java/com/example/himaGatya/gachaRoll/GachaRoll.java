@@ -37,13 +37,14 @@ public class GachaRoll {
 	public ModelAndView display(ModelAndView model) {
 		List<Events> customerstmp = service.getEventsList();
 		List<Events> customers = new ArrayList<Events>();
-		Events eventstmp = new Events();
-		eventstmp = customerstmp.get(0);
+//		Events eventstmp = new Events();
+		Events eventstmp = customerstmp.get(0);
+		System.out.println("-----------------------------------------"+eventstmp.getName());
 		eventstmp.setCost(0);
 		customers.add(eventstmp);
-		for ( Events a: customers) {
-			System.out.println(a.getName());
-		}
+//		for ( Events a: customers) {
+//			System.out.println(a.getName());
+//		}
 		model.setViewName("home/index");
 		model.addObject("customers",customers);
         return model;
