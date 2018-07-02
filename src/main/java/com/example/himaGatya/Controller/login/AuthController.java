@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 	
 	@Autowired
-    UserService userService;
+    CertificationsService CertificationService;
 
     @RequestMapping("/")
     public String index() {
@@ -53,14 +53,14 @@ public class AuthController {
         }
 
         try {
-            userService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
+            CertificationService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("signupError", true);
             return "signup";
         }
 
         try {
-            request.login(signupForm.getUsername(), signupForm.getPassword());
+            request.login(signupForm.getMailAddress(), signupForm.getPassword());
         } catch (ServletException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package com.example.himaGatya.Controller.login.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,14 +10,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-//import com.example.himaGatya.CertificationService;
-import com.example.himaGatya.Controller.login.UserService;
+import com.example.himaGatya.Controller.login.CertificationsService;
+
+
 
 @EnableWebSecurity
+@EnableScheduling
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private CertificationsService certificationService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -24,16 +27,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers( "/signup", "/login", "/login-error").permitAll()
                 .antMatchers("/**").hasRole("USER")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest()
+                .authenticated().and().csrf().disable().formLogin()
+                .loginPage("/login").failureUrl("/login?error=true")
+                .defaultSuccessUrl("/")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .and()
             .formLogin()
-                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/",false);
+                .loginPage("/login").failureUrl("/login-error").defaultSuccessUrl("/home");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-        	.userDetailsService(userService)
+        	.userDetailsService(certificationService)
         	.passwordEncoder(passwordEncoder());
+        
+        userService.registerUser("username", "password", "mail@Address");
 
     }
 

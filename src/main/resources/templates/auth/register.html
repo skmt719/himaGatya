@@ -13,11 +13,11 @@ body {
 </head>
 
 <body>
-<<<<<<< Updated upstream
+
 	<form method="POST" action="auth/register">
-=======
+
 	<form method="POST" th:action="@{/signup}" th:object="${signupForm}" method="post">
->>>>>>> Stashed changes
+
 		<div class="p-3 mb-2 bg-warning text-black">
 			<div class="container-fluid">
 				<div class="col-xs-12 col-lg-12 col-xs-6">
@@ -25,12 +25,10 @@ body {
 						<h3>新規登録</h3>
 					</div>
 					<br>
-<<<<<<< Updated upstream
-					
-=======
+
+
 
 					<p th:if="${signupError}"><em>Username or mail address is already used.</em></p>
->>>>>>> Stashed changes
 					<div class="row justify-content-center">
 						<div class="col-sm-2">User Name</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
@@ -39,14 +37,16 @@ body {
 								<p><em th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</em></p>
 						</div>
 					</div>
-					
+
 					<div class="row justify-content-center">
 						<div class="col-sm-2">Email*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
+							<p><em th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}">Mail Address Error</em></p>
 							<input type="text" class="form-control input-sm" id="email"
-								placeholder="mail@sample.com*" name="email" size="20">
+								placeholder="mail@sample.com*" name="emailAddress" size="20">
 						</div>
 					</div>
+					<p><em th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</em></p>
 					<div class="row justify-content-center">
 						<div class="col-sm-2">Password*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
@@ -54,12 +54,12 @@ body {
 								placeholder="password*" name="password" size="20">
 						</div>
 					</div>
-					<div class="row justify-content-center">
+					<!-- <div class="row justify-content-center">
 						<div class="col-sm-2">Mation password*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="text" class="form-control input-sm" id="password"
 								placeholder="mation password*" name="password" size="20">
-						</div>
+						</div> -->
 					</div>
 
 					<div class="row justify-content-center">
@@ -97,6 +97,10 @@ body {
 
 		</div>
 	</form>
+
+	<p><a th:href="@{/login}">Login</a></p>
+
+	<p><a th:href="@{/}">Back to index</a></p>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script
