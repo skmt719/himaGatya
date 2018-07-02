@@ -53,14 +53,64 @@ public class CustomerController {
 
 	////////////////////////////////////////////////////////
 	//
-	// ホーム画面①
+	// ホーム画面1
 	//
 	////////////////////////////////////////////////////////
-	@GetMapping("/")
+	@GetMapping("/home/1")
 	public String home_one(Model model) {
-		return "/home/home";
+		return "home/home_1";
+	}
+	// mypage①へ遷移
+	@PostMapping(value="/home/1" , params="myPage")
+	public String home_one_jumpToMyPage() {
+		return "myPage/1";
 	}
 
+	////////////////////////////////////////////////////////
+	//
+	// ホーム画面2
+	//
+	////////////////////////////////////////////////////////
+	@GetMapping("/home/2")
+	public String home_two(Model model) {
+		return "home/home_2";
+	}
+	// myPage①へ遷移
+	@PostMapping(value="/home/2" , params="myPage")
+	public String home_two_jumpToMyPage() {
+		return "myPage/2";
+	}
+
+	////////////////////////////////////////////////////////
+	//
+	// マイページ1
+	//
+	////////////////////////////////////////////////////////
+	@GetMapping("/myPage/1")
+	public String myPage_one(Model model) {
+		return "myPage/myPage_1";
+	}
+	// home①へ遷移
+	@PostMapping(value="/myPage/1" , params="home")
+	public String myPage_one_jumpToHome() {
+		return "home/1";
+	}
+
+
+	////////////////////////////////////////////////////////
+	//
+	// マイページ2
+	//
+	////////////////////////////////////////////////////////
+	@GetMapping("/myPage/2")
+	public String myPage_two(Model model) {
+		return "myPage/myPage_2";
+	}
+	// home②へ遷移
+	@PostMapping(value="/myPage/2" , params="home")
+	public String myPage_two_jumpToHome() {
+		return "home/2";
+	}
 
 
 	////////////////////////////////////////////////////////
@@ -75,13 +125,11 @@ public class CustomerController {
 		model.addAttribute("customers", customers);
 		return "/event/index";
 	}
-
 	// イベントの新規作成 jump edit page
 	@PostMapping(value="/admin" , params="createNew")
 	public String newEventCreate() {
 		return "redirect:/admin/edit";
 	}
-
 	// イベントの編集 jump edit page
 	@PostMapping(value="/admin" , params="update")
 	public ModelAndView selectEventEdit(ModelAndView mav ,
@@ -95,11 +143,18 @@ public class CustomerController {
 		mav.setViewName("event/edit");
 		return mav;
 	}
-
 	// イベントの削除
 	@PostMapping(value="/admin" , params="delete")
 	public String selectEventDelete(@ModelAttribute EventsForm form, BindingResult bindingresult) {
 		eventServiceImpl.deleteEventById(form.getSelectedEvents());	// table の指定イベントを削除
+		return "redirect:/admin";
+	}
+	// ログアウト
+	@PostMapping(value="/admin" , params="logout")
+	public String LogoutButton(@ModelAttribute EventsForm form, BindingResult bindingresult) {
+		// ログアウト処理
+
+
 		return "redirect:/admin";
 	}
 
