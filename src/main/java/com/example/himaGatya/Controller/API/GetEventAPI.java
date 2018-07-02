@@ -50,7 +50,7 @@ abstract class GetEventAPI<T> {
 		String ymd = new SimpleDateFormat("yyyyMMdd").format(date);
 		File file = new File(filename + "\\" + ymd + ".txt");
 		// ファイルのパスを指定する
-	    try (FileReader fileReader = new FileReader(file);){
+	    try (FileReader fileReader = new FileReader(file)){
 	        // ファイルが存在しない場合に例外が発生するので確認する
 	        if (!file.exists()) {
 	            return "ファイルが存在しません";
