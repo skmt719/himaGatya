@@ -23,8 +23,6 @@ public class CustomerController {
 	EventsServiceImpl eventServiceImpl;
 	@Autowired
 	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
-	@Autowired
-
 
 
 
