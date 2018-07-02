@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
@@ -121,6 +122,10 @@ abstract class GetEventAPI<T> {
 	//必要なデータへの整形
 	abstract String ShapingString(String data);
 	
-	//Beanに書き込んだデータのBeanへの書き込み
+	//読み込んだデータのインスタンスへの書き込み
 	abstract T[] StrageData(String str);
+	
+	//インスタンスに書き込んだデータのエンティティ及びデータベースへの書き込み
+	//abstract void SaveTable(T[] list);
+	abstract Events Save(T r);
 }
