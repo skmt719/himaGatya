@@ -104,33 +104,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="success">
+
+								<tr th:each="customer:${customers}">
 									<td><img src="https://upload.wikimedia.org/wikipedia/ja/b/b5/Noimage_image.png" id="eve1" width="130" height="130" alt="Events1"  title="Events1"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="warning">
-									<td><img src="" width="100" height="100" alt="Events2"  title="Events2"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="danger">
-									<td><img src="" width="100" height="100" alt="Events3"  title="Events3"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="info">
-									<td><img src="" width="100" height="100" alt="Events4"  title="Events4"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="info">
-									<td><img src="" width="100" height="100" alt="Events5"  title="Events5"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="info">
-									<td><img src="" width="100" height="100" alt="Events6"  title="Events6"></td>
-									<td>イベント詳細</td>
-								</tr>
-								<tr class="info">
-									<td><img src="" width="100" height="100" alt="Events7"  title="Events7"></td>
-									<td>イベント詳細</td>
+									<td th:text="${customer.name}">title</td>
 								</tr>
 
 							</tbody>

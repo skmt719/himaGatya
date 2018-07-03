@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org/">
 
 <head>
 <meta charset="utf-8">
@@ -76,7 +76,7 @@ label {
 			<h4 class="text-white">MENU</h4>
 			<nav class="nav flex-column">
 				<a class="nav-link" href="#">登録情報編集</a> <a class="nav-link" href="#">利用規約</a>
-				<a class="nav-link" href="#">プライバシーポリシー</a> <a class="nav-link"
+				<a class="nav-link" href="#">プライバリーポリシー</a> <a class="nav-link"
 					href="#">お問い合わせ</a> <a class="nav-link" href="#">キャッシュを消去する</a>
 			</nav>
 		</div>
@@ -98,31 +98,32 @@ label {
 			<div class="row">
 				<div class="col-xs-12 col-lg-12 col-xs-6">
 					<div class="row justify-content-center">
-						<img src="../logo.png" width="" height="" alt="" border="0"
+						<img src="img/logo.png" width="" height="" alt="" border="0"
 							align="center" hspace="10" vspace="10">
 					</div>
 					<br>
-					<form action="#" th:action="@{/home/1}" th:object="${events}" method="post">
-					<button type="submit" name="gacha" class="card">
+
+					<div class="card">
 						<h5 class="card-header">今日のガチャ引いてないよ？</h5>
-						<div class="card-body">
-							<div class="row justify-content-around">
-								<div class="col-4">
-									<img src="img/touchme1.png" width="" height="100" alt=""
-										border="0" align="center" hspace="10" vspace="10">
+						<form action="#" th:action="@{/home/2}" method="post">
+							<button type="submit" name="gacha" class="card-body">
+								<div class="row justify-content-around">
+									<div class="col-4">
+										<img th:src="*{imageUrl}" src="/img/touchme1.png" width="" height="100" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
+									<div class="col-4">
+										<img src="/img/gachagacha.png" width="" height="300" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
+									<div class="col-4">
+										<img src="/img/touchme2.png" width="" height="150" alt=""
+											border="0" align="center" hspace="10" vspace="10">
+									</div>
 								</div>
-								<div class="col-4">
-									<img src="img/gachagacha.png" width="" height="300" alt=""
-										border="0" align="center" hspace="10" vspace="10">
-								</div>
-								<div class="col-4">
-									<img src="img/touchme2.png" width="" height="150" alt=""
-										border="0" align="center" hspace="10" vspace="10">
-								</div>
-							</div>
-						</div>
-					</button>
-					</form>
+							</button>
+						</form>
+					</div>
 
 					<br>
 					<div class="card">
@@ -131,12 +132,10 @@ label {
 					</div>
 					<br>
 
-					<div class="row justify-content-center">
-						<form action="radio.php" method="post">
-							<input type="radio" name="myhome" value="1" id="home"> <label
-								for="home">Home</label> <input type="radio" name="myhome"
-								value="2" id="mypage"> <label for="mypage">My
-								Page</label>
+					<div>
+						<form action="#" th:action="@{/home/2}" method="post">
+							<button type="submit" name="home" id="home">Home</button>
+							<button type="submit" name="myPage"id="myPage">My Page</button>
 						</form>
 					</div>
 				</div>

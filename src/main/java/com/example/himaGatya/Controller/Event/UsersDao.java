@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface UsersDao extends JpaRepository <Users, Long> {
 
 	public List<Users> findAll();
-
+	public Users findByName(String name);
 }
 
 
