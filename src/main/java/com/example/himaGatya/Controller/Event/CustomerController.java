@@ -82,14 +82,15 @@ public class CustomerController {
 	////////////////////////////////////////////////////////
 	@GetMapping("/home/2")
 	public String home_two(Model model) {
-		return "home/home_2";
+		Events eventsForm = new Events();
+		model.addAttribute("events",eventsForm);
+		return "/home/home_2";
 	}
 	// myPage①へ遷移
 	@PostMapping(value="/home/2" , params="myPage")
 	public String home_two_jumpToMyPage() {
 		return "myPage/2";
 	}
-
 	// ガチャを引いたとき
 	@PostMapping(value="/home/2" , params="gacha")
 	public String gachaRoll(
@@ -124,8 +125,20 @@ public class CustomerController {
 		}
 
 		// ガチャ演出画面へ遷移
-		return "home/gacha";
+		return "/gacha";
 	}
+
+	////////////////////////////////////////////////////////
+	//
+	// ガチャ演出ページ
+	//
+	////////////////////////////////////////////////////////
+	@GetMapping("/gacha")
+	public String gacha(Model model) {
+		return "/home/gacha";
+	}
+
+
 
 	////////////////////////////////////////////////////////
 	//
