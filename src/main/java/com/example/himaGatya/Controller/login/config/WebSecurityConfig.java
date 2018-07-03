@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             http.formLogin()
                 .loginPage("/login").failureUrl("/login-error")
                 .defaultSuccessUrl("/home")
-                .usernameParameter("username")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .and();
          // ログアウト設定

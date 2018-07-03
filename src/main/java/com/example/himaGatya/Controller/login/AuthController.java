@@ -40,7 +40,7 @@ public class AuthController {
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "loginAuth";
+        return "Auth/login";
     }
 
     @GetMapping("/signUp")
