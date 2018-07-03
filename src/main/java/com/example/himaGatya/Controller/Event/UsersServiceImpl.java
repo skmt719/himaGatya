@@ -12,7 +12,9 @@ public class UsersServiceImpl implements UsersService {
 	UsersDao usersDao;
 
 
-
+	public Users getUsersByName(String name) {
+		return usersDao.findByName(name);
+	}
 
 	@Override
 	public Users getUsersById(long id) {
