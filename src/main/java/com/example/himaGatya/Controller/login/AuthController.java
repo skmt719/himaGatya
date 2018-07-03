@@ -43,7 +43,7 @@ public class AuthController {
         return "Auth/login";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("signupForm", new SignupForm());
         return "auth/register";
@@ -57,9 +57,10 @@ public class AuthController {
 
         try {
             CertificationService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
+            
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("signupError", true);
-            return "signup";
+            return "/signup";
         }
 
         try {
