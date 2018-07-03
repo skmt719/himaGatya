@@ -28,23 +28,6 @@ public class CustomerController {
 	@Autowired
 	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
 
-
-
-	////////////////////////////////////////////////////////
-	//
-	// データ確認用テストコード test.html
-	//
-	////////////////////////////////////////////////////////
-	// Certifications entity
-
-	// Events entity
-	@GetMapping("/view/events")
-	public String eventCheck(Model model) {
-		List<Events> customers = eventServiceImpl.getEventsList();
-		model.addAttribute("customers", customers);
-		return "/test";
-	}
-
 	////////////////////////////////////////////////////////
 	//
 	// ホーム画面1
@@ -150,11 +133,13 @@ public class CustomerController {
 	public String showEventsList(Model model ) {
 		List<Events> customers = eventServiceImpl.getEventsList();
 		model.addAttribute("customers", customers);
+		model.addAttribute("logedIn", true);
 		return "/event/index";
 	}
 	// イベントの新規作成 jump edit page
 	@PostMapping(value="/admin" , params="createNew")
-	public String newEventCreate() {
+	public String newEventCreate(Model model) {
+		model.addAttribute("logedIn", true);
 		return "redirect:/admin/edit";
 	}
 	// イベントの編集 jump edit page
@@ -167,6 +152,7 @@ public class CustomerController {
 		events = eventServiceImpl.getEventsById( form.getSelectedEvents() );	// form からidを取得し、eventServiceImplにてイベント本体を取得
 
 		model.addAttribute("events" , events);
+		model.addAttribute("logedIn", true);
 		mav.setViewName("event/edit");
 		return mav;
 	}
@@ -195,6 +181,7 @@ public class CustomerController {
 	public String GetEventsEdit(Model model) {
 		Events eventsForm = new Events();
 		model.addAttribute("events",eventsForm);
+		model.addAttribute("logedIn", true);
 		return "/event/edit";
 	}
 	// データ登録 save ボタン処理

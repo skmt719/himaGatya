@@ -31,11 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/home/**").hasRole("USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated().and().csrf().disable();
+                .authenticated()
+          .and().csrf()
+          		.disable();
     	// ログイン設定
             http.formLogin()
                 .loginPage("/login").failureUrl("/login-error")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/home/2")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and();

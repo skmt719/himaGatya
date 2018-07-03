@@ -1,57 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>新規登録</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-	integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-	crossorigin="anonymous"></script>
-
+<!-- ヘッダーの表示 -->
+<head th:replace="layout/header :: layout_header(~{::title})">
+	<meta charset="utf-8">
+	<title>新規登録</title>
 </head>
+
 
 <body>
 
-	<!-- 非表示コンテンツ -->
-	<div class="collapse" id="navbarToggleExternalContent">
-		<div class="bg-dark p-4">
-			<h4 class="text-white">MENU</h4>
-			<nav class="nav flex-column">
-				<a class="nav-link" href="#">登録情報編集</a> <a class="nav-link" href="#">利用規約</a>
-				<a class="nav-link" href="#">プライバリーポリシー</a> <a class="nav-link"
-					href="#">お問い合わせ</a> <a class="nav-link" href="#">キャッシュを消去する</a>
-			</nav>
-		</div>
+	<!-- サイドメニューの表示 -->
+	<div th:replace="layout/sidemenu :: sidemenu">
 	</div>
 
-	<!-- 切替ボタン -->
-	<nav class="navbar navbar-dark bg-secondary">
-		<button type="button" class="navbar-toggler" data-toggle="collapse"
-			data-target="#navbarToggleExternalContent"
-			aria-controls="navbarToggleExternalContent" aria-expanded="false"
-			aria-label="折り畳みナビゲーション">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-	</nav>
 	<div class="p-3 mb-2 bg-warning text-black">
 		<div class="container-fluid">
 
 
 			<form action="#" th:action="@{/signup}" th:object="${signupForm}" method="post"><!-- fooooooooooooooooooooooooooorm -->
-
 
     			<p th:if="${signupError}"><em>Username or mail address is already used.</em></p>
 				<div class="col-xs-12 col-lg-12 col-xs-6">
@@ -66,26 +33,26 @@
 					<br>
 
 					<div class="row justify-content-center">
-						<div class="col-sm-2">Email*</div>
+						<div class="col-sm-2">Email</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="email" id="mailAddress" name="mailAddress" class="form-control input-sm"
 								placeholder="mail@sample.com*" size="20">
 						</div>
 					</div>
 					<div class="row justify-content-center">
-						<div class="col-sm-2">Password*</div>
+						<div class="col-sm-2">Password</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="password" id="password" name="password" class="form-control input-sm"
 								placeholder="password* 8文字以上" size="20" />
 						</div>
 					</div>
-					<div class="row justify-content-center">
+					<!-- <div class="row justify-content-center">
 						<div class="col-sm-2">Mation password*</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
 							<input type="password" id="passwordConfirm" name="password" class="form-control input-sm"
 								placeholder="mation password*" size="20">
 						</div>
-					</div>
+					</div> -->
 					<div class="row justify-content-center">
 						<div class="col-sm-2">Nickname</div>
 						<div class="col-sm-3 form-inline" style="padding: 3px;">
@@ -94,7 +61,7 @@
 						</div>
 					</div>
 
-					<div class="row justify-content-center">
+					<!-- <div class="row justify-content-center">
 						<div class="col-sm-2">Sex</div>
 						<div class="form-group">
 
@@ -115,13 +82,18 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 
 				<div class="text-center" style="padding: 30px;">
 					<button type="submit" class="btn btn-secondary">
 						登録ｗｗｗ <span class="glyphicon glyphicon-chevron-right"></span>
 					</button>
+				</div>
+				<div class="text-center" style="padding: 30px;">
+					<a th:href="@{~/login}">
+						ログインページ <span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
 				</div>
 			</form>
 			<script>

@@ -40,7 +40,7 @@ public class AuthController {
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "Auth/login";
+        return "auth/login";
     }
 
     @GetMapping("/signup")
@@ -52,7 +52,7 @@ public class AuthController {
     @PostMapping("/signup")
     public String signupPost(Model model, @Valid SignupForm signupForm, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "auth/register";
         }
 
         try {
@@ -60,7 +60,7 @@ public class AuthController {
             
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("signupError", true);
-            return "/signup";
+            return "auth/register";
         }
 
         try {
@@ -71,6 +71,11 @@ public class AuthController {
 
         return "redirect:/home";
     }
-
+    
+   @GetMapping("/signup-error")
+    public String SignupError(Model model) {
+        model.addAttribute("signupError", true);
+        return "auth/register";
+    }
 
 }
