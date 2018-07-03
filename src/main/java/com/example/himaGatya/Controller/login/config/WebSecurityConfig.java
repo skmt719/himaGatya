@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     	// 認可の設定
     		http.authorizeRequests()
-                .antMatchers( "/signUp", "/login", "/login-error").permitAll()
+                .antMatchers( "/signup", "/login", "/login-error").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/home/**").hasRole("USER")
                 .antMatchers("/**").hasRole("ADMIN")
