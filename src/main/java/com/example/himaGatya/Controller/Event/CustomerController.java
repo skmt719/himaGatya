@@ -33,15 +33,23 @@ public class CustomerController {
 	// ホーム画面1
 	//
 	////////////////////////////////////////////////////////
-	@GetMapping("/home/1")
+	// mypage①へ遷移
+	@GetMapping("/home")
 	public String home_one(Model model) {
+		model.addAttribute("logedIn", true);
 		return "home/home_1";
 	}
 	// mypage①へ遷移
-	@PostMapping(value="/home/1" , params="myPage")
-	public String home_one_jumpToMyPage() {
-		return "myPage/1";
-	}
+//	@PostMapping(value="/home/1" , params="myPage")
+//	public String home_one_jumpToMyPage(Model model) {
+//		model.addAttribute("logedIn", true);
+//		return "myPage/myPage_1";
+//	}
+	
+//	@GetMapping("home/1")
+//	public String myPage_two_jumpToHome1() {
+//		return "home/home_1";
+//	}
 
 	////////////////////////////////////////////////////////
 	//
@@ -50,13 +58,10 @@ public class CustomerController {
 	////////////////////////////////////////////////////////
 	@GetMapping("/home/2")
 	public String home_two(Model model) {
+		model.addAttribute("logedIn", true);
 		return "home/home_2";
 	}
-	// myPage①へ遷移
-	@PostMapping(value="/home/2" , params="myPage")
-	public String home_two_jumpToMyPage() {
-		return "myPage/2";
-	}
+
 
 	// ガチャを引いたとき
 	@PostMapping(value="/home/2" , params="gacha")
@@ -65,6 +70,7 @@ public class CustomerController {
 						@ModelAttribute EventsForm form ,
 						@ModelAttribute Users users ,
 						BindingResult bindingresult) {
+		model.addAttribute("logedIn", true);
 		List<Events> gachaResult = null;							// ガチャ結果を保存するリスト
         long[] EventIdLists = null;									// EventListsのidのみ取得する変数
 		List<Events> EventLists = eventServiceImpl.getEventsList();	// 全イベントをリストとして取得
@@ -96,10 +102,11 @@ public class CustomerController {
 	// マイページ1
 	//
 	////////////////////////////////////////////////////////
-	@GetMapping("/myPage/1")
-	public String myPage_one(Model model) {
-		return "myPage/myPage_1";
-	}
+//	@GetMapping("/myPage/1")
+//	public String myPage_one(Model model) {
+//		model.addAttribute("logedIn", true);
+//		return "myPage/myPage_1";
+//	}
 	// home①へ遷移
 	@PostMapping(value="/myPage/1" , params="home")
 	public String myPage_one_jumpToHome() {
@@ -112,14 +119,14 @@ public class CustomerController {
 	// マイページ2
 	//
 	////////////////////////////////////////////////////////
-	@GetMapping("/myPage/2")
-	public String myPage_two(Model model) {
-		return "myPage/myPage_2";
+	@GetMapping("myPage/history")
+	public String myPage_two() {
+		return "myPage/myPage_1";
 	}
-	// home②へ遷移
-	@PostMapping(value="/myPage/2" , params="home")
+	
+	@GetMapping("myPage/2")
 	public String myPage_two_jumpToHome() {
-		return "home/2";
+		return "myPage/myPage_2";
 	}
 
 

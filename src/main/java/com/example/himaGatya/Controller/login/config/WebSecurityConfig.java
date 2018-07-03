@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	// 認可の設定
     		http.authorizeRequests()
                 .antMatchers( "/signup", "/login", "/login-error").permitAll()
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/myPage/**").hasRole("USER")
                 .antMatchers("/home/**").hasRole("USER")
                 .antMatchers("/**").hasRole("ADMIN")
                 .anyRequest()
