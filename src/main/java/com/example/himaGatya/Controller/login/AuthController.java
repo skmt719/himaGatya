@@ -15,18 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AuthController {
-	
+
 	@Autowired
-    UserService userService;
+    CertificationsService CertificationService;
 
     @RequestMapping("/")
     public String index() {
-        return "redirect:/messages";
+        return "redirect:/home";
     }
 
     @GetMapping("/login")
     public String login() {
-        return "loginAuth";
+        return "auth/login";
     }
 
     @PostMapping("/login")
@@ -34,39 +34,48 @@ public class AuthController {
         return "redirect:/login-error";
     }
 
+
+
+
     @GetMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "loginAuth";
+        return "auth/login";
     }
-    
+
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("signupForm", new SignupForm());
-        return "signup";
+        return "auth/register";
     }
 
     @PostMapping("/signup")
     public String signupPost(Model model, @Valid SignupForm signupForm, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "auth/register";
         }
 
         try {
-            userService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
+            CertificationService.registerUser(signupForm.getUsername(), signupForm.getPassword(), signupForm.getMailAddress());
+            
         } catch (DataIntegrityViolationException e) {
             model.addAttribute("signupError", true);
-            return "signup";
+            return "auth/register";
         }
 
         try {
-            request.login(signupForm.getUsername(), signupForm.getPassword());
+            request.login(signupForm.getMailAddress(), signupForm.getPassword());
         } catch (ServletException e) {
             e.printStackTrace();
         }
 
-        return "redirect:/messages";
+        return "redirect:/home";
     }
-
+    
+   @GetMapping("/signup-error")
+    public String SignupError(Model model) {
+        model.addAttribute("signupError", true);
+        return "auth/register";
+    }
 
 }
