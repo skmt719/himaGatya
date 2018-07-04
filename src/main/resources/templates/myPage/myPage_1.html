@@ -63,25 +63,8 @@
 
 <body>
 	<!-- 非表示コンテンツ -->
-	<div class="collapse" id="navbarToggleExternalContent">
-		<div class="bg-dark p-4">
-			<h4 class="text-white">MENU</h4>
-			<nav class="nav flex-column">
-				<a class="nav-link" href="#">登録情報編集</a>
-				<a class="nav-link" href="#">利用規約</a>
-				<a class="nav-link" href="#">プライバリーポリシー</a>
-				<a class="nav-link" href="#">お問い合わせ</a>
-				<a class="nav-link" href="#">キャッシュを消去する</a>
-			</nav>
-		</div>
+	<div th:replace="layout/sidemenu :: sidemenu">
 	</div>
-
-	<!-- 切替ボタン -->
-	<nav class="navbar navbar-dark bg-secondary">
-		<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="折り畳みナビゲーション">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-	</nav>
 
 	<div class="p-3 mb-2 bg-warning text-black">
 		<div class="container">
