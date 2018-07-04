@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.himaGatya.Controller.EventsForm;
+import com.example.himaGatya.Controller.login.Certifications;
 
 @Controller
 public class CustomerController {
@@ -27,6 +29,9 @@ public class CustomerController {
 	EventsServiceImpl eventServiceImpl;
 	@Autowired
 	GachaRollLogsServiceImpl gachaRollLogsServiceImpl;
+
+	// マクロ定義
+	public static final int ROLL_COUNT = 3;
 
 	////////////////////////////////////////////////////////
 	//
@@ -45,7 +50,7 @@ public class CustomerController {
 //		model.addAttribute("logedIn", true);
 //		return "myPage/myPage_1";
 //	}
-	
+
 //	@GetMapping("home/1")
 //	public String myPage_two_jumpToHome1() {
 //		return "home/home_1";
@@ -67,34 +72,37 @@ public class CustomerController {
 	@PostMapping(value="/home/2" , params="gacha")
 	public String gachaRoll(
 						Model model ,
+						@AuthenticationPrincipal Certifications certifications,	// loginUserの情報
+						List<GachaRollLogs> gachaRollLogs ,
 						@ModelAttribute EventsForm form ,
-						@ModelAttribute Users users ,
 						BindingResult bindingresult) {
-		model.addAttribute("logedIn", true);
+		// 変数宣言
+		Users users = usersServiceImpl.getUsersByName(certifications.getUsername());
+		long userId = users.getId();								// userId取得
 		List<Events> gachaResult = null;							// ガチャ結果を保存するリスト
         long[] EventIdLists = null;									// EventListsのidのみ取得する変数
 		List<Events> EventLists = eventServiceImpl.getEventsList();	// 全イベントをリストとして取得
 		int NumOfAllEvents = EventLists.size();						// イベントの総数を取得
-		for(int l = 0; l < 3; l ++) {								// 三回行う
-			// 乱数生成(イベントの総数を超えないよう調整)
+		GachaRollLogs gachaVariable = null;							// ガチャログテーブルの一時的な保存用変数
+
+		for(int l = 0; l < ROLL_COUNT; l ++) 						// 三回行う
+		{	// 乱数生成(イベントの総数を超えないよう調整)
 			Random rand = new Random();
 	        int randomNum = rand.nextInt(NumOfAllEvents);			// 0番目のイベントも含める
-	        for ( int i = 0; i < EventLists.size(); ++i ) {
+	        for ( int i = 0; i < EventLists.size(); ++i ) 			// 全てのイベントの数だけループ
+	        {
 	        	EventIdLists[i] = EventLists.get( i ).getId();
 	        }
 	        gachaResult.add( eventServiceImpl.getEventsById(EventIdLists[randomNum]) );	// 乱数を用いてイベントのid取得、代入
+
+	        // ログインしているユーザのidとイベント情報のidを登録
+			gachaVariable.setUser_id(userId);
+			gachaVariable.setEvent_id(gachaResult.get(l).getId());
+			gachaRollLogsServiceImpl.saveGachaRollLogs(gachaVariable);	// 保存
 		}
 
-		// ユーザーのイベントテーブルにガチャの結果を追加
-		// List<Events> userEvents;
-		// for( int n = 0; n < gachaResult.size(); n ++ )
-		// 	userEvents.add( gachaResult[0] );
-		//
-		// ガチャ結果を削除
-		// gachaResult = null;
-
 		// ガチャ演出画面へ遷移
-		return "home/gacha";
+		return "/gacha";
 	}
 
 	////////////////////////////////////////////////////////
@@ -123,7 +131,7 @@ public class CustomerController {
 	public String myPage_two() {
 		return "myPage/myPage_1";
 	}
-	
+
 	@GetMapping("myPage/2")
 	public String myPage_two_jumpToHome() {
 		return "myPage/myPage_2";
